@@ -14,8 +14,8 @@ button {
 
 body {
   font: 1em/1.5;
-  color: #184f68;
-	background: #accbd9;
+  color: #08d16e;
+	background: white;
 }
 
 header {
@@ -38,7 +38,7 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #85b5ca;
+	background: #dcf7e9;
 }
 
 fieldset,
@@ -189,4 +189,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .error {
   color: red;
+}
+
+#total {
+  font-weight: bold;
 }
