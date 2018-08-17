@@ -214,10 +214,10 @@ const checkboxError = document.createElement('label');
 checkErrorMsg(checkboxError, 'You have to select at least 1 activity', prepend, activities);
 
 const inputError = document.createElement('label');
-checkErrorMsg(inputError, 'Insert a Name', insertBefore, basicFieldset, inputName);
+checkErrorMsg(inputError, 'Insert a valid Name', insertBefore, basicFieldset, inputName);
 
 const emailError = document.createElement('label');
-checkErrorMsg(emailError, 'Insert a valid email', insertBefore, basicFieldset, inputEmail);
+checkErrorMsg(emailError, 'Insert a valid Email', insertBefore, basicFieldset, inputEmail);
 
 const cvvError = document.createElement('label');
 checkErrorMsg(cvvError, 'Insert a valid cvv number', prepend, paymentFieldset);
@@ -239,6 +239,12 @@ function checkEmail(email) {
   if(dot <= at + 2) return false;
   if (dot === email.length - 1) return false;
   return true;
+}
+
+//function to check that the name input only contains letters and spaces
+function checkName(name){
+  console.log(/^[A-Za-z\s]+$/.test(name));
+  return /^[A-Za-z\s]+$/.test(name);
 }
 
 //listen for a click on the submit button, prevent the form to be submitted if
@@ -266,6 +272,10 @@ registerButton.addEventListener('click', (e) => {
     inputError.style.display = '';
     e.preventDefault();
   }
+  if(!checkName(inputName.value)){
+    inputError.style.display = '';
+    e.preventDefault();
+  }
   if(!checkEmail(inputEmail.value)){
     emailError.style.display = '';
     e.preventDefault();
@@ -273,11 +283,9 @@ registerButton.addEventListener('click', (e) => {
   if(selectPayment.value === 'credit card'){
     if(cardNumber.value.length === 0){
       cardError.style.display = '';
-      console.log('aaaaaaaaaa');
       e.preventDefault();
     } else if (cardNumber.value.length < 13){
       card2Error.style.display = '';
-      console.log('bbbbbbbbb');
       e.preventDefault();
     } else if (cardNumber.value.length > 16){
       card2Error.style.display = '';
@@ -294,7 +302,7 @@ registerButton.addEventListener('click', (e) => {
   }
 })
 
-//real time email validation checked
+//real time email validation
 inputEmail.addEventListener('keyup', () => {
   emailError.style.display = 'none';
   if(!checkEmail(inputEmail.value)){
